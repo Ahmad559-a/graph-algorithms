@@ -1,5 +1,7 @@
 #include "graph.h"
+#include<iostream>
 #include<queue>
+#include<string>
 
 using namespace std;
 
@@ -18,7 +20,6 @@ void Graph::add_edge(int u, int w) {
         return;
     
     adj[u].push_back(w);
-	adj[w].push_back(u);
 }
 
 bool Graph::has_edge(int u, int w) {
@@ -85,9 +86,32 @@ void Graph::DFT(int source, int color[], stack<int>& s) {
 
     for(int neighbor : adj[source]) {
         if(color[neighbor] == 1) DFT(neighbor, color, s);
+        else if (color[neighbor] == 0) throw string("THIS GRAPH IS NOT DAG");
     }
 
     color[source] = -1;
     s.push(source);
     
+}
+
+vector<int> Graph::topological_order() {
+    int* colors = new int[V];
+    stack<int> s;
+    vector<int> reslut;
+
+    for(int i = 0; i < V; i++){
+        colors[i] = 1;
+    }
+
+    for(int i = 0; i < V; i++){
+        if(colors[i] == 1) DFT(i, colors, s);
+    }
+
+    while (!s.empty())
+    {
+        reslut.push_back(s.top());
+        s.pop();
+    }
+    delete[] colors;
+    return reslut;
 }

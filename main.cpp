@@ -1,5 +1,6 @@
-#include<iostream>
 #include "graph.h"
+#include<iostream>
+#include<map>
 using namespace std;
 
 
@@ -36,18 +37,36 @@ int main() {
     //     cout << c << " : " << result[i] << endl;  
     // }
 
-    stack<int> s;
-    int colors[10];
+    // DFT IMPLEMENTATION
+    // stack<int> s;
+    // int colors[10];
 
-    for(int i = 0; i < 10; i++) colors[i] = 1;
+    // for(int i = 0; i < 10; i++) colors[i] = 1;
 
-    g.DFT(0, colors, s);
+    // g.DFT(0, colors, s);
 
-    c = 'A';
-    while(!s.empty()){
-        int vertex = s.top();
-        cout << (char)(c + vertex) << " ===> ";
-        s.pop(); 
+    // c = 'A';
+    // while(!s.empty()){
+    //     int vertex = s.top();
+    //     cout << (char)(c + vertex) << " ===> ";
+    //     s.pop(); 
+    // }
+
+    Graph wearing(5);// 0: undies || 1: pants || 2: socks || 3: shoes || 4: belt
+    map<int, string> names;
+    names.insert(pair(0, "undies"));
+    names.insert(pair(1, "pants"));
+    names.insert(pair(2, "socks"));
+    names.insert(pair(3, "shoes"));
+    names.insert(pair(4, "belt"));
+
+    wearing.add_edge(0, 1);
+    wearing.add_edge(1, 3);
+    wearing.add_edge(1, 4);
+    wearing.add_edge(2, 3);
+
+    for(int node : wearing.topological_order()){
+        cout << names[node] << " ";
     }
 
     return 0;
