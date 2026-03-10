@@ -22,15 +22,32 @@ int main() {
     g.add_edge(2, 3);
     g.add_edge(2, 6);
     g.add_edge(5, 8);
+    g.add_edge(4, 5);
     g.add_edge(8, 9);
 
-    vector<int> result = g.BFT(0);
+    // vector<int> result = g.BFT(0);
 
-    cout << "Shortest path distances from A (Node 0):" << endl;
+    //BFT EXAMPLE
 
-    for(int i = 0; i < 10; i++){
-        c = 65 + i;
-        cout << c << " : " << result[i] << endl;  
+    // cout << "Shortest path distances from A (Node 0):" << endl;
+
+    // for(int i = 0; i < 10; i++){
+    //     c = 65 + i;
+    //     cout << c << " : " << result[i] << endl;  
+    // }
+
+    stack<int> s;
+    int colors[10];
+
+    for(int i = 0; i < 10; i++) colors[i] = 1;
+
+    g.DFT(0, colors, s);
+
+    c = 'A';
+    while(!s.empty()){
+        int vertex = s.top();
+        cout << (char)(c + vertex) << " ===> ";
+        s.pop(); 
     }
 
     return 0;

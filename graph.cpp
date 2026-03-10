@@ -83,11 +83,11 @@ void Graph::DFT(int source, int color[], stack<int>& s) {
     // 0 = gray , -1 = black, 1 = white
     color[source] = 0;
 
-    for(int i  = 0; i < adj[source].size(); i++) {
-        if(color[i] == 1) DFT(i, color, s);
-        else if (i == -1){
-            
-        }
+    for(int neighbor : adj[source]) {
+        if(color[neighbor] == 1) DFT(neighbor, color, s);
     }
+
+    color[source] = -1;
+    s.push(source);
     
 }

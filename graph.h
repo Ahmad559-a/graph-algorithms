@@ -15,12 +15,11 @@ public:
 	vector<int> topological_order();
 	vector<int> BFT(int source);
 	bool has_edge(int u, int w);
+	void DFT(int source, int color[], stack<int>& s);
 
 private:
 	int V;    // No. of vertices 
 	list<int> *adj;
-
-	void DFT(int source, int color[], stack<int>& s);
 };
 
 
